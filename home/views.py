@@ -49,7 +49,10 @@ def get_homepage_image(request):
 
 def get_image_url(request):
     image = BackgroundImage.objects.last()
-    image_resp = {'html': image.html_url}
+    image_resp = {'html': image.html_url,
+                  'full_url': image.full_url,
+                  'regular_url': image.regular_url,
+                  'date_added': image.date_added}
 
     return JsonResponse(image_resp)
 
