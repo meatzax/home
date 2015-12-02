@@ -1,5 +1,9 @@
 Vue.config.delimiters = ["{!!", "!!}"];
 
+
+
+
+
 var demoGrid = Vue.extend({
     template: '#grid-template',
     props: {
@@ -57,8 +61,21 @@ var backgroundImg = Vue.extend({
     }
 });
 
+
+
+
+
+// headerComponent loads the view components below the main title bar depending on selection
 var headerComponent = Vue.extend({
     template: '#homepageheader',
+    methods: {
+        loadHome: function() {
+            app.currentView = 'home'
+        },
+        loadAbout: function() {
+            app.currentView = 'about'
+        }
+    }
 });
 
 var splashComponent = Vue.extend({
@@ -91,6 +108,40 @@ var contentComponent = Vue.extend({
     },
 });
 
+
+
+
+
+var aboutContentComponent = Vue.extend({
+    template: '#aboutcontent',
+    data: function() {
+        return {
+            searchQuery: '',
+            gridColumns: ['name', 'power', 'favecolor'],
+            gridData: [
+                { name: 'Chuck Norris', power: Infinity, favecolor: 'blue' },
+                { name: 'Bruce Lee', power: 9000, favecolor: 'yellow' },
+                { name: 'Jackie Chan', power: 7000, favecolor: 'red' },
+                { name: 'Jet Li', power: 8000, favecolor: 'green' }
+            ],
+            listItems: [
+                { message: 'Foo' },
+                { message: 'Bar' }
+            ],
+            image_src_url: '',
+            text: 'string',
+        }
+    },
+    components: {
+        'demo-grid': demoGrid,
+        'list-test': listTest,
+        'background-img': backgroundImg,
+    },
+});
+
+
+
+
 var homeComponent = Vue.extend({
     template: '#home',
     components: {
@@ -100,13 +151,26 @@ var homeComponent = Vue.extend({
     }
 });
 
+var aboutComponent = Vue.extend({
+    template: '#about',
+    components: {
+        'homepageheader': headerComponent,
+        'content': aboutContentComponent,
+    }
+});
+
+
+
+// Create Main Vue App
+// Load home view by default
 var app = new Vue({
     el: '#app',
     data: {
         currentView: 'home',
     },
     components: {
-        home: homeComponent
+        home: homeComponent,
+        about: aboutComponent
     }
 });
 

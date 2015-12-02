@@ -288,6 +288,15 @@ a.pure-button-primary {
     background: #111;
 }
 
+.about {
+  background: #2d3e50;
+  width: 100%;
+  height: 100%;
+}
+
+
+
+
 /*
  * -- TABLET (AND UP) MEDIA QUERIES --
  * On tablets and other medium-sized devices, we want to customize some
